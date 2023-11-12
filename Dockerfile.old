@@ -1,0 +1,15 @@
+FROM jupyter/scipy-notebook:python-3.10
+
+RUN apt-get update && apt-get install -y vim
+
+RUN pip install mlflow
+
+COPY ./README.md /tmp/README.md
+
+ADD ./README.md /tmp/README2.md
+
+ADD https://raw.githubusercontent.com/interTwin-eu/interLink/main/README.md ./read.md
+
+WORKDIR /tmp
+
+ADD ./README.md ./README2.md
