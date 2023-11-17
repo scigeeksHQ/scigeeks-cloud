@@ -40,6 +40,22 @@ containers: {
 			NATS_TOKEN: "@{service.nats.secrets.admin.token}"
 			//MLFLOW_S3_IGNORE_TLS: "true"
 		}
+		probes: [
+			{
+				type:                "liveness"
+				initialDelaySeconds: 10
+				http: {
+					url: "http://localhost:5000/"
+				}
+			},
+			{
+				type:                "readiness"
+				initialDelaySeconds: 5
+				http: {
+					url: "http://localhost:5000/"
+				}
+			},
+		]
 	}
 	jupyterlab: {
 		build: {
@@ -58,6 +74,22 @@ containers: {
 			JLAB_TOKEN: "secret://jlabtoken/token"
 			//MLFLOW_S3_IGNORE_TLS: "true"
 		}
+		probes: [
+			{
+				type:                "liveness"
+				initialDelaySeconds: 10
+				http: {
+					url: "http://localhost:8888/"
+				}
+			},
+			{
+				type:                "readiness"
+				initialDelaySeconds: 5
+				http: {
+					url: "http://localhost:8888/"
+				}
+			},
+		]
 	}
 }
 
