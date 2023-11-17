@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  # mariaDB
+
+  # minio
+
+  # MLFlow tracking
+
+  # Nats
+
+
+  # JupyterHUB (docker spawner)
+  

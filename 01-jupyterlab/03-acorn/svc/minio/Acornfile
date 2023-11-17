@@ -1,0 +1,36 @@
+services: {
+	{
+		s3: {
+  			image: "docker.io/dciangot/minio-acorn:v1"
+		}
+	}
+}
+
+containers: {
+	jupyterlab: {
+		build: {
+			context: "."
+			dockerfile: "Dockerfile"
+		}
+		consumes: ["s3", "nats", "mariadb"]
+		cmd: ["bash", "-c", "start.sh jupyter lab --ServerApp.token=${JLAB_TOKEN}"]
+		ports: publish: "8888/http"
+		env: {
+			S3_ENDPOINT_URL: "@{service.s3.address}"
+			AWS_ACCESS_KEY_ID: "@{service.s3.secrets.admin.username}"
+			AWS_SECRET_ACCESS_KEY: "@{service.s3.secrets.admin.password}"
+			JLAB_TOKEN: "secret://jlabtoken/token"
+		}
+	}
+}
+
+
+secrets: jlabtoken: {
+	name:        "JLab token"
+	description: "Credentials for the admin user"
+	type:        "token"
+	params: {
+		length:     32
+		characters: "A-Za-z0-9"
+	}
+}
