@@ -38,7 +38,7 @@ services:
     image: "docker.io/nats:2.10.5-alpine3.18"
     ports:
       - :4222/tcp
-      - :8222/http
+      - :8222/tcp
     command: ["-c", "/etc/nats/nats-server.conf", "-m", "8222"]
     volumes:
       - ./config/nats-server.conf:/etc/nats/nats-server.conf
