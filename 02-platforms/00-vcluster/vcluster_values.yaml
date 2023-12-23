@@ -1,0 +1,9 @@
+extraArgs:
+  - --tls-san=vcluster-demo.X.X.X.X.myip.cloud.infn.it 
+syncer:
+  extraArgs:
+  - --tls-san=aiitw-apiserver.X.X.X.X.myip.cloud.infn.it
+sync:
+  nodes:
+    enabled: true
+    syncAllNodes: true
